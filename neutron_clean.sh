@@ -1,4 +1,8 @@
 #/bin/bash!
+#
+# tips:
+# 1. remove "grep rally" if you want to delete non rally created resources as well
+# 2. change "grep 172" in case of floatingip. 172 here is the starting of puplic ip
 
 source ~/devstack/openrc admin admin
 
@@ -26,6 +30,11 @@ id=$(echo $x| awk '{ print $2;}')
 neutron vpn-ikepolicy-delete $id;
 done
 
+neutron floatingip-list | grep 172| while read x; do
+id=$(echo $x| awk '{ print $2;}')
+neutron floatingip-delete $id;
+done
+
 neutron router-list | grep rally | while read x; do
 id=$(echo $x| awk '{ print $2;}')
 neutron router-gateway-clear $id;
@@ -49,12 +58,13 @@ id=$(echo $x| awk '{ print $2;}')
 nova delete $id;
 done
 
-rm -f ~/rally_keypair*
+rm -f /tmp/rally_keypair*
 
 neutron ipsec-site-connection-list
 neutron vpn-service-list
 neutron vpn-ipsecpolicy-list
 neutron vpn-ikepolicy-list
+neutron floatingip-list
 neutron router-list 
 neutron net-list
 neutron security-group-list
