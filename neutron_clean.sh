@@ -30,6 +30,11 @@ id=$(echo $x| awk '{ print $2;}')
 neutron vpn-ikepolicy-delete $id;
 done
 
+nova list --all-tenants| grep rally| while read x; do
+id=$(echo $x| awk '{ print $2;}')
+nova delete $id;
+done
+
 neutron floatingip-list | grep 172| while read x; do
 id=$(echo $x| awk '{ print $2;}')
 neutron floatingip-delete $id;
@@ -51,11 +56,6 @@ done
 neutron security-group-list | grep rally | while read x; do
 id=$(echo $x| awk '{ print $2;}')
 neutron security-group-delete $id;
-done
-
-nova list --all-tenants| grep rally| while read x; do
-id=$(echo $x| awk '{ print $2;}')
-nova delete $id;
 done
 
 rm -f /tmp/rally_keypair*
