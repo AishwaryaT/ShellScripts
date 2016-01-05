@@ -7,7 +7,6 @@
 source ~/devstack/openrc admin admin
 
 echo "Clean Up Script Started"
-echo -e "\n"
 echo -e "It cleans up all rally created resources including \n1.ipsec-site-connections \n2.vpn-services \n3.ikepolicies \n4.ipsecpolicies \n5.routers \n6.networks \n7.secgroups \n8.nova instances \n9.keypairs."
 
 neutron ipsec-site-connection-list | grep rally | while read x; do
