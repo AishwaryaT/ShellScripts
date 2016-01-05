@@ -1,13 +1,6 @@
-Network Stack Cleanup
------------------------
 
-It cleans up all rally created resources including 
-1.ipsec-site-connections 
-2.vpn-services 
-3.ikepolicies 
-4.ipsecpolicies 
-5.routers 
-6.networks 
-7.secgroups 
-8.nova instances 
-9.keypairs.
+Automated frequently used commands using shell script.
+
+1. cleanup neutron stack
+2. list all neutron resources
+3. create dummy process
